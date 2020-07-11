@@ -19,6 +19,6 @@ git clone https://github.com/shaikhshadab00/masonry_layout_php.git
 - Run below URL in your browser.
 
 ```bash
-http://www.example.com/${project-directory}/masonry_layout_html/index.php
+http://www.example.com/${project-directory}/masonry_layout_php/index.php
 or
-http://localhost/${project-directory}/masonry_layout_html/index.php
+http://localhost/${project-directory}/masonry_layout_php/index.php
