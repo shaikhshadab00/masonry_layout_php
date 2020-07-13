@@ -34,8 +34,7 @@
         $json_data = json_decode($fetch_json_data);
         if (!empty($json_data) && is_array($json_data)) {
             echo '<div class="row masonry-container">';
-
-            $view_count_array = array_column($json_data, 'viewCount');
+            $view_count_array = array_column_custom($json_data, 'viewCount');
             arsort($view_count_array);
             $counter = 0;
             foreach ($view_count_array as $key => $value) {
@@ -80,6 +79,26 @@
 
             echo '<div>';
         }
+        
+        function array_column_custom(array $input, $columnKey, $indexKey = null) {
+            $result = array();
+            foreach ($input as $subArray) {
+                $subArray = is_object($subArray) ? (array) $subArray : $subArray;
+                if (!is_array($subArray)) {
+                    continue;
+                } elseif (is_null($indexKey) && array_key_exists($columnKey, $subArray)) {
+                    $result[] = $subArray[$columnKey];
+                } elseif (array_key_exists($indexKey, $subArray)) {
+                    if (is_null($columnKey)) {
+                        $result[$subArray[$indexKey]] = $subArray;
+                    } elseif (array_key_exists($columnKey, $subArray)) {
+                        $result[$subArray[$indexKey]] = $subArray[$columnKey];
+                    }
+                }
+            }
+            return $result;
+        }
+
         ?>
     </div>
 </body>
